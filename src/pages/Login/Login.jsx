@@ -1,9 +1,24 @@
-import { useState } from "react"
-import { Eye, EyeOff, ChevronDown } from "lucide-react"
-import "./Login.css"
+import { useState } from "react";
+import { Eye, EyeOff, ChevronDown } from "lucide-react";
+import "./Login.css";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const [showPassword, setShowPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
+
+  const navigate = useNavigate();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleLogin = () => {
+    if (!username || !password) {
+      setError("Barcha maydonlarni to‘ldiring");
+      return;
+    }
+    setError("");
+    navigate("/dashboard");
+  };
 
   return (
     <div className="login-page">
@@ -38,6 +53,8 @@ function Login() {
             <input
               type="text"
               placeholder="Foydalanuvchi nomingizni kiriting"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
 
@@ -48,6 +65,8 @@ function Login() {
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Parolingizni kiriting"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
 
               <button
@@ -66,18 +85,16 @@ function Login() {
               Meni eslab qolish
             </label>
 
-            <button className="forgot-btn">
-              Parolni unutdingizmi?
-            </button>
+            <button className="forgot-btn">Parolni unutdingizmi?</button>
           </div>
-
-          <button className="login-btn">
+          {error && <p className="error-message">{error}</p>}
+          <button className="login-btn" onClick={handleLogin}>
             Kirish
           </button>
         </div>
       </section>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;
