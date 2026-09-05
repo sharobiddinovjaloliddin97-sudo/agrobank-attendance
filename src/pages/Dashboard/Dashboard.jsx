@@ -18,6 +18,7 @@ import {
   UserX,
   HeartPulse,
   Plane,
+  ChevronUp,
 } from "lucide-react";
 
 import "./Dashboard.css";
@@ -32,6 +33,8 @@ import { useState } from "react";
 function Dashboard() {
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
+  const [attendanceOpen, setAttendanceOpen] = useState(true);
+  const [scheduleOpen, setScheduleOpen] = useState(true);
   return (
     <div className={`dashboard-page ${collapsed ? "sidebar-collapsed" : ""}`}>
       {/* SIDEBAR */}
@@ -46,64 +49,89 @@ function Dashboard() {
             <Home size={20} />
             <span>Dashboard</span>
           </button>
-
           <div className="nav-group">
-            <button className="nav-item group-title">
+            <button
+              className="nav-item group-title"
+              type="button"
+              onClick={() => setAttendanceOpen((prev) => !prev)}
+            >
               <BarChart3 size={20} />
+
               <span>Davomat to‘g‘risida ma’lumotlar</span>
-              <ChevronDown size={16} className="nav-arrow" />
+
+              {attendanceOpen ? (
+                <ChevronDown size={16} className="nav-arrow" />
+              ) : (
+                <ChevronUp size={16} className="nav-arrow" />
+              )}
             </button>
 
-            <button className="nav-item sub-item">
-              <CalendarDays size={18} />
-              <span>Bugungi davomat</span>
-            </button>
+            {attendanceOpen && (
+              <div className="submenu">
+                <button className="nav-item sub-item">
+                  <CalendarDays size={18} />
+                  <span>Bugungi davomat</span>
+                </button>
 
-            <button className="nav-item sub-item">
-              <Clock3 size={18} />
-              <span>Kelish va ketish</span>
-            </button>
+                <button className="nav-item sub-item">
+                  <Clock3 size={18} />
+                  <span>Kelish va ketish</span>
+                </button>
 
-            <button className="nav-item sub-item">
-              <BriefcaseMedical size={18} />
-              <span>Sababli yo‘qlik</span>
-            </button>
+                <button className="nav-item sub-item">
+                  <BriefcaseMedical size={18} />
+                  <span>Sababli yo‘qlik</span>
+                </button>
 
-            <button className="nav-item sub-item">
-              <Coffee size={18} />
-              <span>Tanaffuslar</span>
-            </button>
+                <button className="nav-item sub-item">
+                  <Coffee size={18} />
+                  <span>Tanaffuslar</span>
+                </button>
 
-            <button className="nav-item sub-item">
-              <Users size={18} />
-              <span>Takroriy qoidabuzarlar</span>
-            </button>
+                <button className="nav-item sub-item">
+                  <Users size={18} />
+                  <span>Takroriy qoidabuzarlar</span>
+                </button>
+              </div>
+            )}
           </div>
-
           <div className="sidebar-divider"></div>
-
           <div className="nav-group">
-            <button className="nav-item group-title">
+            <button
+              className="nav-item group-title"
+              type="button"
+              onClick={() => setScheduleOpen((prev) => !prev)}
+            >
               <CalendarRange size={20} />
+
               <span>Ish grafigi</span>
-              <ChevronDown size={16} className="nav-arrow" />
+
+              {scheduleOpen ? (
+                <ChevronDown size={16} className="nav-arrow" />
+              ) : (
+                <ChevronUp size={16} className="nav-arrow" />
+              )}
             </button>
 
-            <button className="nav-item sub-item">
-              <CalendarDays size={18} />
-              <span>Ish grafiklari</span>
-            </button>
+            {scheduleOpen && (
+              <div className="submenu">
+                <button className="nav-item sub-item">
+                  <CalendarDays size={18} />
+                  <span>Ish grafiklari</span>
+                </button>
 
-            <button className="nav-item sub-item">
-              <ArrowLeftRight size={18} />
-              <span>Smenalar va dam olish</span>
-            </button>
+                <button className="nav-item sub-item">
+                  <ArrowLeftRight size={18} />
+                  <span>Smenalar va dam olish</span>
+                </button>
 
-            <button className="nav-item sub-item">
-              <TrendingUp size={18} />
-              <span>Grafikdan og‘ishlar</span>
-            </button>
-          </div>
+                <button className="nav-item sub-item">
+                  <TrendingUp size={18} />
+                  <span>Grafikdan og‘ishlar</span>
+                </button>
+              </div>
+            )}
+          </div>{" "}
         </nav>
       </aside>
 
