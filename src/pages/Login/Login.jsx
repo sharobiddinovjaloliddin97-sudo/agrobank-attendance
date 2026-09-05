@@ -21,21 +21,61 @@ function Login() {
   };
 
   return (
-    <div className="login-page">
+    <main className="login-page">
+      {/* LEFT SIDE */}
       <section className="login-left">
-        <div className="brand">AGROBANK</div>
+        <div className="brand">
+          <div className="brand-logo">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <span>Agrobank</span>
+        </div>
+
+        <div className="decor decor-one"></div>
+        <div className="decor decor-two"></div>
+        <div className="decor decor-three"></div>
 
         <div className="intro">
           <h1>Xodimlar davomati</h1>
+
           <p>
-            Bank xodimlarining ishga kelishi va ketishini nazorat qilish tizimi
+            Bank xodimlarining ishga kelishi
+            <br />
+            va ketishini nazorat qilish tizimi
           </p>
+        </div>
+
+        <div className="left-features">
+          <div className="feature">
+            <ShieldCheck size={46} strokeWidth={1.6} />
+            <span>Xavfsiz tizim</span>
+          </div>
+
+          <div className="feature-divider"></div>
+
+          <div className="feature">
+            <Clock3 size={46} strokeWidth={1.6} />
+            <span>Real vaqt nazorati</span>
+          </div>
+
+          <div className="feature-divider"></div>
+
+          <div className="feature">
+            <Headphones size={46} strokeWidth={1.6} />
+            <span>24/7 monitoring</span>
+          </div>
         </div>
       </section>
 
+      {/* RIGHT SIDE */}
       <section className="login-right">
-        <div className="top-bar">
+        <div className="language-wrapper">
           <button className="language-btn">
+            <Globe2 size={18} />
             O‘zbekcha
             <ChevronDown size={16} />
           </button>
@@ -61,7 +101,9 @@ function Login() {
           <div className="form-group">
             <label>Parol</label>
 
-            <div className="password-wrapper">
+            <div className="input-wrapper">
+              <LockKeyhole size={20} />
+
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Parolingizni kiriting"
@@ -82,7 +124,7 @@ function Login() {
           <div className="login-options">
             <label className="remember">
               <input type="checkbox" />
-              Meni eslab qolish
+              <span>Meni eslab qolish</span>
             </label>
 
             <button className="forgot-btn">Parolni unutdingizmi?</button>
@@ -91,7 +133,25 @@ function Login() {
           <button className="login-btn" onClick={handleLogin}>
             Kirish
           </button>
+
+          <div className="divider">
+            <span></span>
+            <p>yoki</p>
+            <span></span>
+          </div>
+
+          <button className="eimzo-btn">
+            <ShieldCheck size={20} />
+            E-IMZO orqali kirish
+          </button>
         </div>
+
+        <div className="security-info">
+          <ShieldCheck size={20} />
+          <span>Ma’lumotlaringiz himoyalangan</span>
+        </div>
+
+        <footer>© 2026 Agrobank ATB. Barcha huquqlar himoyalangan.</footer>
       </section>
     </div>
   );
