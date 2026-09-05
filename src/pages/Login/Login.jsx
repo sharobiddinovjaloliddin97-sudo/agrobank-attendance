@@ -1,21 +1,33 @@
 import { useState } from "react";
-import { Eye, EyeOff, ChevronDown } from "lucide-react";
-import "./Login.css";
 import { useNavigate } from "react-router-dom";
+import {
+  ChevronDown,
+  Clock3,
+  Eye,
+  EyeOff,
+  Globe2,
+  Headphones,
+  LockKeyhole,
+  ShieldCheck,
+  UserRound,
+} from "lucide-react";
+
+import "./Login.css";
 
 function Login() {
-  const [showPassword, setShowPassword] = useState(false);
-
   const navigate = useNavigate();
+
+  const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const handleLogin = () => {
-    if (!username || !password) {
+    if (!username.trim() || !password.trim()) {
       setError("Barcha maydonlarni to‘ldiring");
       return;
     }
+
     setError("");
     navigate("/dashboard");
   };
@@ -74,7 +86,7 @@ function Login() {
       {/* RIGHT SIDE */}
       <section className="login-right">
         <div className="language-wrapper">
-          <button className="language-btn">
+          <button type="button" className="language-btn">
             <Globe2 size={18} />
             O‘zbekcha
             <ChevronDown size={16} />
@@ -89,22 +101,29 @@ function Login() {
           </p>
 
           <div className="form-group">
-            <label>Foydalanuvchi nomi</label>
-            <input
-              type="text"
-              placeholder="Foydalanuvchi nomingizni kiriting"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
+  <label htmlFor="username">Foydalanuvchi nomi</label>
+
+  <div className="input-wrapper">
+    <UserRound size={20} />
+
+    <input
+      id="username"
+      type="text"
+      placeholder="Foydalanuvchi nomingizni kiriting"
+      value={username}
+      onChange={(e) => setUsername(e.target.value)}
+    />
+  </div>
+</div>
 
           <div className="form-group">
-            <label>Parol</label>
+            <label htmlFor="password">Parol</label>
 
             <div className="input-wrapper">
               <LockKeyhole size={20} />
 
               <input
+                id="password"
                 type={showPassword ? "text" : "password"}
                 placeholder="Parolingizni kiriting"
               />
@@ -112,7 +131,7 @@ function Login() {
               <button
                 type="button"
                 className="password-toggle"
-                onClick={() => setShowPassword(!showPassword)}
+                onClick={() => setShowPassword((prev) => !prev)}
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
@@ -125,12 +144,16 @@ function Login() {
               <span>Meni eslab qolish</span>
             </label>
 
-            <button className="forgot-btn">
-              Parolni unutdingizmi?
-            </button>
+            <button className="forgot-btn">Parolni unutdingizmi?</button>
           </div>
+
           {error && <p className="error-message">{error}</p>}
-          <button className="login-btn" onClick={handleLogin}>
+
+          <button
+            type="button"
+            className="login-btn"
+            onClick={handleLogin}
+          >
             Kirish
           </button>
 
@@ -140,7 +163,7 @@ function Login() {
             <span></span>
           </div>
 
-          <button className="eimzo-btn">
+          <button type="button" className="eimzo-btn">
             <ShieldCheck size={20} />
             E-IMZO orqali kirish
           </button>
@@ -151,10 +174,12 @@ function Login() {
           <span>Ma’lumotlaringiz himoyalangan</span>
         </div>
 
-        <footer>© 2026 Agrobank ATB. Barcha huquqlar himoyalangan.</footer>
+        <footer>
+          © 2026 Agrobank ATB. Barcha huquqlar himoyalangan.
+        </footer>
       </section>
-    </div>
+    </main>
   );
 }
 
-export default Login
+export default Login;
