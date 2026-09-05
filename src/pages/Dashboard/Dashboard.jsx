@@ -26,10 +26,14 @@ import StatCard from "../../components/StatCard/StatCard";
 import AttendanceLineChart from "../../components/AttendanceCharts/AttendanceLineChart";
 import AttendanceDonutChart from "../../components/AttendanceCharts/AttendanceDonutChart";
 import { AlertTriangle, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function Dashboard() {
+  const navigate = useNavigate();
+  const [collapsed, setCollapsed] = useState(false);
   return (
-    <div className="dashboard-page">
+    <div className={`dashboard-page ${collapsed ? "sidebar-collapsed" : ""}`}>
       {/* SIDEBAR */}
       <aside className="sidebar">
         <div className="sidebar-brand">
@@ -107,7 +111,11 @@ function Dashboard() {
       <div className="dashboard-main">
         {/* HEADER */}
         <header className="top-header">
-          <button className="menu-btn" type="button">
+          <button
+            className="menu-btn"
+            type="button"
+            onClick={() => setCollapsed(!collapsed)}
+          >
             <Menu size={22} />
           </button>
 
@@ -125,7 +133,11 @@ function Dashboard() {
 
             <div className="header-separator"></div>
 
-            <button className="logout-button" type="button">
+            <button
+              className="logout-button"
+              type="button"
+              onClick={() => navigate("/")}
+            >
               <LogOut size={18} />
               <span>Chiqish</span>
             </button>

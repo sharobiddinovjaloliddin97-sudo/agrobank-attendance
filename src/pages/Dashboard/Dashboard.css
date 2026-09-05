@@ -426,6 +426,58 @@
 .mini-bar-item small {
   font-size: 9px;
 }
+.sidebar {
+  transition: width 0.25s ease;
+}
+
+.sidebar-collapsed .sidebar {
+  width: 72px;
+}
+
+.sidebar-collapsed .sidebar-brand span,
+.sidebar-collapsed .nav-item span,
+.sidebar-collapsed .nav-arrow {
+  display: none;
+}
+
+.sidebar-collapsed .sidebar-brand {
+  justify-content: center;
+}
+
+.sidebar-collapsed .nav-item {
+  justify-content: center;
+}
+
+.dashboard-main {
+  transition: all 0.25s ease;
+}
+.filter-btn:hover,
+.language-btn:hover,
+.bottom-card-btn:hover,
+.attention-btn:hover {
+  background: #f7f9f8;
+}
+
+.logout-button:hover {
+  color: #d62828;
+}
+
+@media (max-width: 900px) {
+  .dashboard-top {
+    flex-direction: column;
+  }
+
+  .dashboard-filters {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn,
+  .updated-info {
+    flex: 1;
+    min-width: 150px;
+  }
+}
 
 @media (max-width: 1100px) {
   .bottom-grid {
