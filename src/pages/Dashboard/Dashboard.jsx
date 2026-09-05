@@ -25,6 +25,7 @@ import "./Dashboard.css";
 import StatCard from "../../components/StatCard/StatCard";
 import AttendanceLineChart from "../../components/AttendanceCharts/AttendanceLineChart";
 import AttendanceDonutChart from "../../components/AttendanceCharts/AttendanceDonutChart";
+import { AlertTriangle, ArrowRight } from "lucide-react";
 
 function Dashboard() {
   return (
@@ -156,9 +157,7 @@ function Dashboard() {
                 <CalendarDays size={16} />
               </button>
 
-              <div className="updated-info">
-                Oxirgi yangilanish: 17:05
-              </div>
+              <div className="updated-info">Oxirgi yangilanish: 17:05</div>
             </div>
           </section>
 
@@ -236,6 +235,171 @@ function Dashboard() {
           <section className="charts-grid">
             <AttendanceLineChart />
             <AttendanceDonutChart />
+          </section>
+          {/* Bottom */}
+          <section className="attention-strip">
+            <div className="attention-left">
+              <AlertTriangle size={20} />
+              <span>
+                <strong>Diqqat talab qiladi:</strong> 23 nafar xodim ketma-ket 3
+                martadan ortiq kechikkan
+              </span>
+            </div>
+
+            <button type="button" className="attention-btn">
+              Ro‘yxatni ko‘rish
+              <ArrowRight size={17} />
+            </button>
+          </section>
+
+          <section className="bottom-grid">
+            <div className="bottom-card">
+              <div className="bottom-card-header">
+                <h3>Muammoli bo‘linmalar</h3>
+                <span>⋮</span>
+              </div>
+
+              <div className="problem-table">
+                <div className="table-row table-head">
+                  <span>Bo‘linma</span>
+                  <span>Kechikish</span>
+                  <span>Kelmagan</span>
+                  <span>Davomat</span>
+                </div>
+
+                <div className="table-row">
+                  <span>1&nbsp; Bosh ofis</span>
+                  <span>28 (18%)</span>
+                  <span>20 (8%)</span>
+                  <span>82%</span>
+                </div>
+
+                <div className="table-row">
+                  <span>2&nbsp; Toshkent shahar</span>
+                  <span>31 (17%)</span>
+                  <span>26 (9%)</span>
+                  <span>81%</span>
+                </div>
+
+                <div className="table-row">
+                  <span>3&nbsp; Samarqand</span>
+                  <span>21 (15%)</span>
+                  <span>14 (6%)</span>
+                  <span>85%</span>
+                </div>
+
+                <div className="table-row">
+                  <span>4&nbsp; Andijon</span>
+                  <span>18 (14%)</span>
+                  <span>11 (6%)</span>
+                  <span>86%</span>
+                </div>
+
+                <div className="table-row">
+                  <span>5&nbsp; Farg‘ona</span>
+                  <span>15 (12%)</span>
+                  <span>9 (5%)</span>
+                  <span>88%</span>
+                </div>
+              </div>
+
+              <button className="bottom-card-btn" type="button">
+                Barcha bo‘linmalarni ko‘rish
+                <ArrowRight size={17} />
+              </button>
+            </div>
+
+            <div className="bottom-card">
+              <div className="bottom-card-header">
+                <h3>Takroriy kechikuvchilar</h3>
+                <span>⋮</span>
+              </div>
+
+              <div className="late-list">
+                <div className="late-row">
+                  <span>1</span>
+                  <span>Yusiev B.</span>
+                  <span>Kredit bo‘limi</span>
+                  <strong>8 marta</strong>
+                </div>
+
+                <div className="late-row">
+                  <span>2</span>
+                  <span>Melikuziev O.</span>
+                  <span>Operatsion bo‘lim</span>
+                  <strong>8 marta</strong>
+                </div>
+
+                <div className="late-row">
+                  <span>3</span>
+                  <span>Xikmatov I.</span>
+                  <span>Hisob-kitob bo‘limi</span>
+                  <strong>7 marta</strong>
+                </div>
+
+                <div className="late-row">
+                  <span>4</span>
+                  <span>Rahimov F.</span>
+                  <span>IT bo‘limi</span>
+                  <strong>6 marta</strong>
+                </div>
+
+                <div className="late-row">
+                  <span>5</span>
+                  <span>Xikmat Q.</span>
+                  <span>Xavfsizlik bo‘limi</span>
+                  <strong>6 marta</strong>
+                </div>
+              </div>
+
+              <button className="bottom-card-btn" type="button">
+                Barcha ro‘yxatni ko‘rish
+                <ArrowRight size={17} />
+              </button>
+            </div>
+
+            <div className="bottom-card">
+              <div className="bottom-card-header">
+                <h3>O‘rtacha kechikish vaqti</h3>
+                <span>⋮</span>
+              </div>
+
+              <div className="late-average">
+                <div className="late-average-number">
+                  <Clock3 size={30} />
+                  <strong>18</strong>
+                  <span>daqiqa</span>
+                </div>
+
+                <p>↓ 3 daqiqa o‘tgan haftaga nisbatan</p>
+
+                <div className="mini-bars">
+                  {[
+                    ["Dush", 24],
+                    ["Sesh", 22],
+                    ["Chor", 21],
+                    ["Paysh", 20],
+                    ["Juma", 19],
+                    ["Shan", 15],
+                    ["Yak", 18],
+                  ].map(([day, value]) => (
+                    <div className="mini-bar-item" key={day}>
+                      <span>{value}</span>
+                      <div
+                        className="mini-bar"
+                        style={{ height: `${value * 2}px` }}
+                      ></div>
+                      <small>{day}</small>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <button className="bottom-card-btn" type="button">
+                Batafsil statistikani ko‘rish
+                <ArrowRight size={17} />
+              </button>
+            </div>
           </section>
         </main>
       </div>
