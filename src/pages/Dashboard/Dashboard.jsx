@@ -21,10 +21,15 @@ import {
 } from "lucide-react";
 
 import "./Dashboard.css";
+
 import StatCard from "../../components/StatCard/StatCard";
+import AttendanceLineChart from "../../components/AttendanceCharts/AttendanceLineChart";
+import AttendanceDonutChart from "../../components/AttendanceCharts/AttendanceDonutChart";
+
 function Dashboard() {
   return (
     <div className="dashboard-page">
+      {/* SIDEBAR */}
       <aside className="sidebar">
         <div className="sidebar-brand">
           <div className="brand-mark"></div>
@@ -97,9 +102,11 @@ function Dashboard() {
         </nav>
       </aside>
 
+      {/* MAIN AREA */}
       <div className="dashboard-main">
+        {/* HEADER */}
         <header className="top-header">
-          <button className="menu-btn">
+          <button className="menu-btn" type="button">
             <Menu size={22} />
           </button>
 
@@ -117,14 +124,16 @@ function Dashboard() {
 
             <div className="header-separator"></div>
 
-            <button className="logout-button">
+            <button className="logout-button" type="button">
               <LogOut size={18} />
               <span>Chiqish</span>
             </button>
           </div>
         </header>
 
+        {/* CONTENT */}
         <main className="dashboard-content">
+          {/* TITLE + FILTERS */}
           <section className="dashboard-top">
             <div className="dashboard-title">
               <h1>Xodimlar davomati</h1>
@@ -132,25 +141,28 @@ function Dashboard() {
             </div>
 
             <div className="dashboard-filters">
-              <button className="filter-btn">
+              <button className="filter-btn" type="button">
                 Hudud / filial
                 <ChevronDown size={16} />
               </button>
 
-              <button className="filter-btn">
+              <button className="filter-btn" type="button">
                 Bo‘lim
                 <ChevronDown size={16} />
               </button>
 
-              <button className="filter-btn date-filter">
+              <button className="filter-btn date-filter" type="button">
                 02.09.2026
                 <CalendarDays size={16} />
               </button>
 
-              <div className="updated-info">Oxirgi yangilanish: 17:05</div>
+              <div className="updated-info">
+                Oxirgi yangilanish: 17:05
+              </div>
             </div>
           </section>
 
+          {/* STAT CARDS */}
           <section className="stats-grid">
             <StatCard
               icon={<UsersRound size={22} />}
@@ -218,6 +230,12 @@ function Dashboard() {
               trendType="down"
               color="blue"
             />
+          </section>
+
+          {/* CHARTS */}
+          <section className="charts-grid">
+            <AttendanceLineChart />
+            <AttendanceDonutChart />
           </section>
         </main>
       </div>
