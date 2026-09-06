@@ -14,9 +14,23 @@ import {
   ChevronUp,
 } from "lucide-react";
 
-function Sidebar() {
+function Sidebar({ t }) {
   const [attendanceOpen, setAttendanceOpen] = useState(true);
   const [scheduleOpen, setScheduleOpen] = useState(true);
+
+  const texts = t || {
+    dashboard: "Dashboard",
+    attendanceGroup: "Davomat to‘g‘risida ma’lumotlar",
+    todayAttendance: "Bugungi davomat",
+    arrivalDeparture: "Kelish va ketish",
+    excusedAbsence: "Sababli yo‘qlik",
+    breaks: "Tanaffuslar",
+    repeatViolators: "Takroriy qoidabuzarlar",
+    scheduleGroup: "Ish grafigi",
+    schedules: "Ish grafiklari",
+    shiftsRest: "Smenalar va dam olish",
+    deviations: "Grafikdan og‘ishlar",
+  };
 
   return (
     <aside className="sidebar">
@@ -28,7 +42,7 @@ function Sidebar() {
       <nav className="sidebar-nav">
         <button className="nav-item active" type="button">
           <Home size={20} />
-          <span>Dashboard</span>
+          <span>{texts.dashboard}</span>
         </button>
 
         <div className="nav-group">
@@ -38,7 +52,7 @@ function Sidebar() {
             onClick={() => setAttendanceOpen((prev) => !prev)}
           >
             <BarChart3 size={20} />
-            <span>Davomat to‘g‘risida ma’lumotlar</span>
+            <span>{texts.attendanceGroup}</span>
             {attendanceOpen ? (
               <ChevronDown size={16} className="nav-arrow" />
             ) : (
@@ -50,27 +64,27 @@ function Sidebar() {
             <div className="submenu">
               <button className="nav-item sub-item" type="button">
                 <CalendarDays size={18} />
-                <span>Bugungi davomat</span>
+                <span>{texts.todayAttendance}</span>
               </button>
 
               <button className="nav-item sub-item" type="button">
                 <Clock3 size={18} />
-                <span>Kelish va ketish</span>
+                <span>{texts.arrivalDeparture}</span>
               </button>
 
               <button className="nav-item sub-item" type="button">
                 <BriefcaseMedical size={18} />
-                <span>Sababli yo‘qlik</span>
+                <span>{texts.excusedAbsence}</span>
               </button>
 
               <button className="nav-item sub-item" type="button">
                 <Coffee size={18} />
-                <span>Tanaffuslar</span>
+                <span>{texts.breaks}</span>
               </button>
 
               <button className="nav-item sub-item" type="button">
                 <Users size={18} />
-                <span>Takroriy qoidabuzarlar</span>
+                <span>{texts.repeatViolators}</span>
               </button>
             </div>
           )}
@@ -85,7 +99,7 @@ function Sidebar() {
             onClick={() => setScheduleOpen((prev) => !prev)}
           >
             <CalendarRange size={20} />
-            <span>Ish grafigi</span>
+            <span>{texts.scheduleGroup}</span>
             {scheduleOpen ? (
               <ChevronDown size={16} className="nav-arrow" />
             ) : (
@@ -97,17 +111,17 @@ function Sidebar() {
             <div className="submenu">
               <button className="nav-item sub-item" type="button">
                 <CalendarDays size={18} />
-                <span>Ish grafiklari</span>
+                <span>{texts.schedules}</span>
               </button>
 
               <button className="nav-item sub-item" type="button">
                 <ArrowLeftRight size={18} />
-                <span>Smenalar va dam olish</span>
+                <span>{texts.shiftsRest}</span>
               </button>
 
               <button className="nav-item sub-item" type="button">
                 <TrendingUp size={18} />
-                <span>Grafikdan og‘ishlar</span>
+                <span>{texts.deviations}</span>
               </button>
             </div>
           )}

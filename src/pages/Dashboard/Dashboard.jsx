@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Dashboard.css";
+import { translations } from "../../locales/translations";
 
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header/Header";
@@ -14,39 +15,52 @@ import AverageLateTimeCard from "../../components/AverageLateTimeCard/AverageLat
 
 function Dashboard() {
   const [collapsed, setCollapsed] = useState(false);
+  const [lang, setLang] = useState(() => localStorage.getItem("app_lang") || "uz");
+
+  const handleLangChange = (newLang) => {
+    setLang(newLang);
+    localStorage.setItem("app_lang", newLang);
+  };
+
+  const t = translations[lang] || translations.uz;
 
   return (
     <div className={`dashboard-page ${collapsed ? "sidebar-collapsed" : ""}`}>
       {/* SIDEBAR */}
-      <Sidebar />
+      <Sidebar t={t.sidebar} />
 
       {/* MAIN AREA */}
       <div className="dashboard-main">
         {/* HEADER */}
-        <Header onToggleSidebar={() => setCollapsed((prev) => !prev)} />
+        <Header
+          onToggleSidebar={() => setCollapsed((prev) => !prev)}
+          t={t.header}
+          currentLang={lang}
+          onChangeLang={handleLangChange}
+        />
 
         {/* CONTENT */}
         <main className="dashboard-content">
           {/* TITLE + FILTERS */}
-          <DashboardFilters />
+          <DashboardFilters t={t.filters} />
 
           {/* STAT CARDS */}
-          <DashboardStats />
+          <DashboardStats t={t.stats} />
 
           {/* CHARTS */}
           <section className="charts-grid">
-            <AttendanceLineChart />
-            <AttendanceDonutChart />
+            <AttendanceLineChart t={t.charts} />
+            <AttendanceDonutChart t={t.charts} />
           </section>
 
           {/* ATTENTION STRIP */}
-          <AttentionStrip />
+          <AttentionStrip t={t.attention} />
 
           {/* BOTTOM SECTION */}
           <section className="bottom-grid">
-            <ProblemBranchesCard />
-            <RepeatedLateCard />
-            <AverageLateTimeCard />
+            <ProblemBranchesCard t={t.bottom} />
+            <RepeatedLateCard t={t.bottom} />
+            <AverageLateTimeCard t={t.bottom} />
           </section>
         </main>
       </div>
@@ -55,3 +69,4 @@ function Dashboard() {
 }
 
 export default Dashboard;
+

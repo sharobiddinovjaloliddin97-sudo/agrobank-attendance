@@ -2,8 +2,13 @@ import { useNavigate } from "react-router-dom";
 import { Menu, UserRound, LogOut } from "lucide-react";
 import LanguageSelector from "../LanguageSelector/LanguageSelector";
 
-function Header({ onToggleSidebar }) {
+function Header({ onToggleSidebar, t, currentLang, onChangeLang }) {
   const navigate = useNavigate();
+
+  const texts = t || {
+    userRole: "Administrator",
+    logout: "Chiqish",
+  };
 
   return (
     <header className="top-header">
@@ -17,7 +22,10 @@ function Header({ onToggleSidebar }) {
       </button>
 
       <div className="header-right">
-        <LanguageSelector />
+        <LanguageSelector
+          currentLang={currentLang}
+          onChangeLang={onChangeLang}
+        />
 
         <div className="header-user">
           <div className="user-card">
@@ -27,7 +35,7 @@ function Header({ onToggleSidebar }) {
 
             <div className="user-info">
               <strong>Abdulaxatov Diyorbek</strong>
-              <span>Administrator</span>
+              <span>{texts.userRole}</span>
             </div>
           </div>
 
@@ -39,7 +47,7 @@ function Header({ onToggleSidebar }) {
             onClick={() => navigate("/")}
           >
             <LogOut size={18} />
-            <span>Chiqish</span>
+            <span>{texts.logout}</span>
           </button>
         </div>
       </div>

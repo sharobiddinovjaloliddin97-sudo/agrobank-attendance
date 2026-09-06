@@ -1,3 +1,4 @@
+
 import {
   LineChart,
   Line,
@@ -27,42 +28,52 @@ const data = [
   { time: "19:00", came: 430, onTime: 220, late: 60 },
 ];
 
-function AttendanceLineChart() {
+function AttendanceLineChart({ t }) {
+  const texts = t || {
+    lineTitle: "Kunlik davomat dinamikasi",
+    came: "Keldi",
+    onTime: "O‘z vaqtida",
+    late: "Kechikdi",
+  };
+
   return (
     <div className="chart-card line-chart-card">
-      <h3>Kunlik davomat dinamikasi</h3>
+      <h3>{texts.lineTitle}</h3>
 
       <div className="chart-area">
-        <ResponsiveContainer width="100%" height={175}>
-          <LineChart data={data}>
+        <ResponsiveContainer width="100%" height={140}>
+          <LineChart data={data} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="time" />
-            <YAxis />
+            <XAxis dataKey="time" tick={{ fontSize: 10 }} />
+            <YAxis tick={{ fontSize: 10 }} />
             <Tooltip />
-            <Legend />
+            <Legend wrapperStyle={{ fontSize: "11px", paddingTop: "4px" }} />
 
             <Line
               type="monotone"
               dataKey="came"
-              name="Keldi"
+              name={texts.came}
               stroke="#0b6b3a"
               strokeWidth={2}
+              dot={false}
             />
 
             <Line
               type="monotone"
               dataKey="onTime"
-              name="O‘z vaqtida"
+              name={texts.onTime}
               stroke="#16a05d"
               strokeWidth={2}
+              dot={false}
             />
 
             <Line
               type="monotone"
               dataKey="late"
-              name="Kechikdi"
+              name={texts.late}
               stroke="#f59e0b"
               strokeWidth={2}
+              dot={false}
             />
           </LineChart>
         </ResponsiveContainer>
@@ -71,4 +82,4 @@ function AttendanceLineChart() {
   );
 }
 
-export default AttendanceLineChart;
+export default AttendanceLineChart;

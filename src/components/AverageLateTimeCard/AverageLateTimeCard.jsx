@@ -1,52 +1,59 @@
 import { Clock3, ArrowRight } from "lucide-react";
 
-const weeklyData = [
-  { day: "Dush", value: 24 },
-  { day: "Sesh", value: 22 },
-  { day: "Chor", value: 21 },
-  { day: "Paysh", value: 20 },
-  { day: "Juma", value: 19 },
-  { day: "Shan", value: 15 },
-  { day: "Yak", value: 18 },
-];
+const defaultDays = ["Dush", "Sesh", "Chor", "Paysh", "Juma", "Shan", "Yak"];
+const weeklyValues = [24, 22, 21, 20, 19, 15, 18];
 
-function AverageLateTimeCard({ onShowDetails }) {
+function AverageLateTimeCard({ t, onShowDetails }) {
+  const texts = t || {
+    avgTitle: "O‘rtacha kechikish vaqti",
+    minutes: "daqiqa",
+    avgDiff: "↓ 3 daqiqa o‘tgan haftaga nisbatan",
+    viewDetails: "Batafsil statistikani ko‘rish",
+    days: defaultDays,
+  };
+
+  const days = texts.days || defaultDays;
+
   return (
     <div className="bottom-card">
       <div className="bottom-card-header">
-        <h3>O‘rtacha kechikish vaqti</h3>
+        <h3>{texts.avgTitle}</h3>
         <span>⋮</span>
       </div>
 
       <div className="late-average">
         <div className="late-average-number">
-          <Clock3 size={30} />
+          <Clock3 size={22} />
           <strong>18</strong>
-          <span>daqiqa</span>
+          <span>{texts.minutes}</span>
         </div>
 
-        <p>↓ 3 daqiqa o‘tgan haftaga nisbatan</p>
+        <p>{texts.avgDiff}</p>
 
         <div className="mini-bars">
-          {weeklyData.map(({ day, value }) => (
-            <div className="mini-bar-item" key={day}>
-              <span>{value}</span>
-              <div
-                className="mini-bar"
-                style={{ height: `${value * 2}px` }}
-              ></div>
-              <small>{day}</small>
-            </div>
-          ))}
+          {days.map((day, idx) => {
+            const val = weeklyValues[idx] || 15;
+            return (
+              <div className="mini-bar-item" key={day}>
+                <span>{val}</span>
+                <div
+                  className="mini-bar"
+                  style={{ height: `${val * 1.5}px` }}
+                ></div>
+                <small>{day}</small>
+              </div>
+            );
+          })}
         </div>
       </div>
 
       <button className="bottom-card-btn" type="button" onClick={onShowDetails}>
-        <span>Batafsil statistikani ko‘rish</span>
-        <ArrowRight size={17} />
+        <span>{texts.viewDetails}</span>
+        <ArrowRight size={15} />
       </button>
     </div>
   );
 }
 
 export default AverageLateTimeCard;
+
