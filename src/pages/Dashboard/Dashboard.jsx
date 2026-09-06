@@ -177,7 +177,7 @@ function Dashboard() {
           {/* TITLE + FILTERS */}
           <section className="dashboard-top">
             <div className="dashboard-title">
-              <h1>Xodimlar davomati</h1>
+              <h1>Xodimlar Davomati</h1>
               <p>Bugungi davomat holati — 2 sentabr 2026</p>
             </div>
 

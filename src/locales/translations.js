@@ -6,7 +6,7 @@ export const languages = [
 
 export const translations = {
   uz: {
-    title: "Xodimlar davomati",
+    title: "Xodimlar Davomati",
     subtitle: "Bank xodimlarining ishga kelishi\nva ketishini nazorat qilish tizimi",
     secureSystem: "Xavfsiz tizim",
     realTime: "Real vaqt nazorati",
