@@ -1,0 +1,110 @@
+.language-selector-wrapper {
+  position: relative;
+  display: inline-block;
+  user-select: none;
+}
+
+.language-selector-btn {
+  height: 38px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  border: 1px solid #e2e5e8;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1f2937;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.language-selector-btn:hover {
+  border-color: #00733e;
+  color: #00733e;
+  background: #f7f9f8;
+}
+
+.language-selector-btn.open {
+  border-color: #00733e;
+  box-shadow: 0 0 0 3px rgba(0, 115, 62, 0.12);
+}
+
+.language-selector-globe {
+  color: #00733e;
+  flex-shrink: 0;
+}
+
+.language-selector-arrow {
+  color: #6b7280;
+  transition: transform 0.2s ease, color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.language-selector-arrow.open {
+  transform: rotate(180deg);
+  color: #00733e;
+}
+
+.language-selector-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 155px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.04);
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 1000;
+  animation: langFadeIn 0.15s ease-out;
+}
+
+@keyframes langFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.language-selector-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s ease;
+}
+
+.language-selector-option:hover {
+  background: #f0fdf4;
+  color: #00733e;
+}
+
+.language-selector-option.active {
+  background: #eaf7ef;
+  color: #00733e;
+  font-weight: 600;
+}
+
+.language-selector-check {
+  color: #00733e;
+  margin-left: 8px;
+  flex-shrink: 0;
+}

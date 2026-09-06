@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  ChevronDown,
   Clock3,
   Eye,
   EyeOff,
-  Globe2,
   Headphones,
   LockKeyhole,
   ShieldCheck,
@@ -13,24 +11,44 @@ import {
 } from "lucide-react";
 
 import "./Login.css";
+import { translations } from "../../locales/translations";
+import LanguageSelector from "../../components/LanguageSelector/LanguageSelector";
+import appConfig from "../../config/appConfig";
+import { loginUser } from "../../services/authService";
 
 function Login() {
   const navigate = useNavigate();
+
+  const [selectedLang, setSelectedLang] = useState(() => {
+    return localStorage.getItem("app_lang") || appConfig.defaultLang;
+  });
 
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = () => {
+  const t = translations[selectedLang] || translations.uz;
+
+  const handleLogin = async () => {
     if (!username.trim() || !password.trim()) {
-      setError("Barcha maydonlarni to‘ldiring");
+      setError(t.requiredFields);
       return;
     }
 
-    setError("");
-    navigate("/dashboard");
+    try {
+      setLoading(true);
+      setError("");
+      await loginUser({ username, password });
+      navigate("/dashboard");
+    } catch {
+      setError(t.requiredFields);
+    } finally {
+      setLoading(false);
+    }
   };
+
 
   return (
     <main className="login-page">
@@ -52,72 +70,67 @@ function Login() {
         <div className="decor decor-three"></div>
 
         <div className="intro">
-          <h1>Xodimlar davomati</h1>
+          <h1>{t.title}</h1>
 
-          <p>
-            Bank xodimlarining ishga kelishi
-            <br />
-            va ketishini nazorat qilish tizimi
-          </p>
+          <p style={{ whiteSpace: "pre-line" }}>{t.subtitle}</p>
         </div>
 
         <div className="left-features">
           <div className="feature">
             <ShieldCheck size={46} strokeWidth={1.6} />
-            <span>Xavfsiz tizim</span>
+            <span>{t.secureSystem}</span>
           </div>
 
           <div className="feature-divider"></div>
 
           <div className="feature">
             <Clock3 size={46} strokeWidth={1.6} />
-            <span>Real vaqt nazorati</span>
+            <span>{t.realTime}</span>
           </div>
 
           <div className="feature-divider"></div>
 
           <div className="feature">
             <Headphones size={46} strokeWidth={1.6} />
-            <span>24/7 monitoring</span>
+            <span>{t.monitoring}</span>
           </div>
         </div>
       </section>
 
       {/* RIGHT SIDE */}
       <section className="login-right">
-        <div className="language-wrapper">
-          <button type="button" className="language-btn">
-            <Globe2 size={18} />
-            O‘zbekcha
-            <ChevronDown size={16} />
-          </button>
-        </div>
+        <LanguageSelector
+          currentLang={selectedLang}
+          onChangeLang={(code) => {
+            setSelectedLang(code);
+            if (error) setError("");
+          }}
+          className="login-lang"
+        />
 
         <div className="login-card">
-          <h2>Xush kelibsiz</h2>
+          <h2>{t.welcome}</h2>
 
-          <p className="subtitle">
-            Tizimga kirish uchun ma’lumotlaringizni kiriting
-          </p>
+          <p className="subtitle">{t.loginSubtitle}</p>
 
           <div className="form-group">
-  <label htmlFor="username">Foydalanuvchi nomi</label>
+            <label htmlFor="username">{t.usernameLabel}</label>
 
-  <div className="input-wrapper">
-    <UserRound size={20} />
+            <div className="input-wrapper">
+              <UserRound size={20} />
 
-    <input
-      id="username"
-      type="text"
-      placeholder="Foydalanuvchi nomingizni kiriting"
-      value={username}
-      onChange={(e) => setUsername(e.target.value)}
-    />
-  </div>
-</div>
+              <input
+                id="username"
+                type="text"
+                placeholder={t.usernamePlaceholder}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
+          </div>
 
           <div className="form-group">
-            <label htmlFor="password">Parol</label>
+            <label htmlFor="password">{t.passwordLabel}</label>
 
             <div className="input-wrapper">
               <LockKeyhole size={20} />
@@ -125,7 +138,7 @@ function Login() {
               <input
                 id="password"
                 type={showPassword ? "text" : "password"}
-                placeholder="Parolingizni kiriting"
+                placeholder={t.passwordPlaceholder}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -143,10 +156,10 @@ function Login() {
           <div className="login-options">
             <label className="remember">
               <input type="checkbox" />
-              <span>Meni eslab qolish</span>
+              <span>{t.rememberMe}</span>
             </label>
 
-            <button className="forgot-btn">Parolni unutdingizmi?</button>
+            <button type="button" className="forgot-btn">{t.forgotPassword}</button>
           </div>
 
           {error && <p className="error-message">{error}</p>}
@@ -155,30 +168,29 @@ function Login() {
             type="button"
             className="login-btn"
             onClick={handleLogin}
+            disabled={loading}
           >
-            Kirish
+            {loading ? "..." : t.loginBtn}
           </button>
 
           <div className="divider">
             <span></span>
-            <p>yoki</p>
+            <p>{t.or}</p>
             <span></span>
           </div>
 
           <button type="button" className="eimzo-btn">
             <ShieldCheck size={20} />
-            E-IMZO orqali kirish
+            {t.eimzoBtn}
           </button>
         </div>
 
         <div className="security-info">
           <ShieldCheck size={20} />
-          <span>Ma’lumotlaringiz himoyalangan</span>
+          <span>{t.securityInfo}</span>
         </div>
 
-        <footer>
-          © 2026 Agrobank ATB. Barcha huquqlar himoyalangan.
-        </footer>
+        <footer>{t.footer}</footer>
       </section>
     </main>
   );

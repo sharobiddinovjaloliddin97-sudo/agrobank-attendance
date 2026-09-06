@@ -1,31 +1,36 @@
 .stat-card {
     min-width: 0;
-    width: 75%;
+    width: 100%;
     background: #fff;
     border: 1px solid #e7e7e7;
     border-radius: 8px;
-    padding: 16px 12px;
+    padding: 6px 8px;
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease,
         border-color 0.2s ease;
+    box-sizing: border-box;
 }
 
 .stat-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
     border-color: #cfd8d3;
 }
 
-
 .stat-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
     display: grid;
     place-items: center;
     color: white;
-    margin-bottom: 10px;
+    margin-bottom: 4px;
+}
+
+.stat-icon svg {
+    width: 16px;
+    height: 16px;
 }
 
 .stat-icon.green {
@@ -45,17 +50,18 @@
 }
 
 .stat-title {
-    min-height: 34px;
-    font-size: 10px;
+    min-height: 24px;
+    font-size: 10.5px;
     font-weight: 600;
-    line-height: 1.4;
+    line-height: 1.25;
     color: #333;
 }
 
 .stat-value {
-    margin-top: 8px;
-    font-size: 25px;
+    margin-top: 2px;
+    font-size: 18px;
     font-weight: 700;
+    line-height: 1.2;
 }
 
 .stat-value.green {
@@ -75,10 +81,10 @@
 }
 
 .stat-footer {
-    margin-top: 7px;
+    margin-top: 2px;
     display: flex;
-    gap: 10px;
-    font-size: 11px;
+    gap: 6px;
+    font-size: 9.5px;
     color: #444;
 }
 

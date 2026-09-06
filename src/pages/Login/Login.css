@@ -1,6 +1,6 @@
 .login-page {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   font-family: Arial, Helvetica, sans-serif;
   overflow: hidden;
@@ -11,7 +11,7 @@
 
 .login-left {
   width: 50%;
-  min-height: 100vh;
+  height: 100%;
   background: linear-gradient(145deg, #006b3d, #005f35);
   color: white;
   position: relative;
@@ -165,7 +165,7 @@
 
 .login-right {
   width: 50%;
-  min-height: 100vh;
+  height: 100%;
   background: #fafafa;
   position: relative;
 
@@ -178,27 +178,11 @@
 
 /* LANGUAGE */
 
-.language-wrapper {
+.login-lang {
   position: absolute;
-  top: 10px;
-  right: 20px;
-    
-}
-
-.language-btn {
-  height: 38px;
-  padding: 0 14px;
-
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  background: white;
-  border: 1px solid #dedede;
-  border-radius: 8px;
-
-  font-size: 14px;
-  cursor: pointer;
+  top: 16px;
+  right: 24px;
+  z-index: 50;
 }
 
 
@@ -274,8 +258,27 @@
 
   padding: 0 12px;
 
-  font-size: 13px;
+  font-size: 14px;
+  color: #111827 !important;
+  -webkit-text-fill-color: #111827 !important;
+  caret-color: #00733e;
   background: transparent;
+}
+
+.input-wrapper input::placeholder {
+  color: #9ca3af;
+  -webkit-text-fill-color: #9ca3af;
+  opacity: 1;
+}
+
+.input-wrapper input:-webkit-autofill,
+.input-wrapper input:-webkit-autofill:hover,
+.input-wrapper input:-webkit-autofill:focus,
+.input-wrapper input:-webkit-autofill:active {
+  -webkit-text-fill-color: #111827 !important;
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+  box-shadow: 0 0 0px 1000px white inset !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 .password-toggle {
@@ -420,18 +423,64 @@
   font-size: 14px;
   margin-bottom: 12px;
 }
+
+.login-right footer {
+  position: absolute;
+  bottom: 20px;
+  font-size: 12px;
+  color: #888;
+  text-align: center;
+}
+
 @media (max-width: 900px) {
+  .login-page {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
   .login-left {
     display: none;
   }
 
   .login-right {
     width: 100%;
-    padding: 20px;
+    height: auto;
+    min-height: 100vh;
+    padding: 60px 20px 30px;
+    justify-content: center;
   }
 
   .login-card {
     width: 100%;
     max-width: 430px;
+  }
+
+  .login-right footer {
+    position: static;
+    margin-top: 24px;
+  }
+}
+
+@media (max-height: 680px) and (min-width: 901px) {
+  .login-page {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+
+  .login-left,
+  .login-right {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .login-right {
+    padding: 60px 20px 30px;
+  }
+
+  .login-right footer {
+    position: static;
+    margin-top: 24px;
   }
 }
