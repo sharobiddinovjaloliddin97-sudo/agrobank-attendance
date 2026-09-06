@@ -178,10 +178,11 @@
 
 /* LANGUAGE */
 
-.login-lang {
-  position: absolute;
-  top: 16px;
-  right: 24px;
+.login-right .login-lang,
+.login-lang.language-selector-wrapper {
+  position: absolute !important;
+  top: 24px;
+  right: 28px;
   z-index: 50;
 }
 
@@ -449,6 +450,12 @@
     min-height: 100vh;
     padding: 60px 20px 30px;
     justify-content: center;
+  }
+
+  .login-right .login-lang,
+  .login-lang.language-selector-wrapper {
+    top: 18px;
+    right: 20px;
   }
 
   .login-card {
