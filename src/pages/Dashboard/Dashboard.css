@@ -120,6 +120,12 @@
     align-items: center;
 }
 
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 .header-user {
     display: flex;
     align-items: center;

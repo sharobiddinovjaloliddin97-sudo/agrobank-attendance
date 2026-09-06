@@ -1,12 +1,9 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
-  Check,
-  ChevronDown,
   Clock3,
   Eye,
   EyeOff,
-  Globe2,
   Headphones,
   LockKeyhole,
   ShieldCheck,
@@ -14,32 +11,22 @@ import {
 } from "lucide-react";
 
 import "./Login.css";
-import { languages, translations } from "../../locales/translations";
+import { translations } from "../../locales/translations";
+import LanguageSelector from "../../components/LanguageSelector/LanguageSelector";
 
 function Login() {
   const navigate = useNavigate();
 
-  const [selectedLang, setSelectedLang] = useState("uz");
-  const [isLangOpen, setIsLangOpen] = useState(false);
-  const langDropdownRef = useRef(null);
+  const [selectedLang, setSelectedLang] = useState(() => {
+    return localStorage.getItem("app_lang") || "uz";
+  });
 
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const t = translations[selectedLang];
-
-  // Close language dropdown on outside click
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (langDropdownRef.current && !langDropdownRef.current.contains(event.target)) {
-        setIsLangOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  const t = translations[selectedLang] || translations.uz;
 
   const handleLogin = () => {
     if (!username.trim() || !password.trim()) {
@@ -100,41 +87,14 @@ function Login() {
 
       {/* RIGHT SIDE */}
       <section className="login-right">
-        <div className="language-wrapper" ref={langDropdownRef}>
-          <button
-            type="button"
-            className={`language-btn ${isLangOpen ? "open" : ""}`}
-            onClick={() => setIsLangOpen((prev) => !prev)}
-            aria-expanded={isLangOpen}
-            aria-haspopup="listbox"
-          >
-            <Globe2 size={18} className="language-globe" />
-            <span>{languages.find((l) => l.code === selectedLang)?.label}</span>
-            <ChevronDown size={16} className={`language-arrow ${isLangOpen ? "open" : ""}`} />
-          </button>
-
-          {isLangOpen && (
-            <div className="language-dropdown" role="listbox">
-              {languages.map((lang) => (
-                <button
-                  key={lang.code}
-                  type="button"
-                  className={`language-option ${selectedLang === lang.code ? "active" : ""}`}
-                  onClick={() => {
-                    setSelectedLang(lang.code);
-                    setIsLangOpen(false);
-                    if (error) setError("");
-                  }}
-                  role="option"
-                  aria-selected={selectedLang === lang.code}
-                >
-                  <span>{lang.label}</span>
-                  {selectedLang === lang.code && <Check size={16} className="language-check" />}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
+        <LanguageSelector
+          currentLang={selectedLang}
+          onChangeLang={(code) => {
+            setSelectedLang(code);
+            if (error) setError("");
+          }}
+          className="login-lang"
+        />
 
         <div className="login-card">
           <h2>{t.welcome}</h2>
