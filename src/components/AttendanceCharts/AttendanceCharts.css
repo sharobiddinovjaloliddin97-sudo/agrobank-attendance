@@ -2,7 +2,8 @@
     background: white;
     border: 1px solid #e5e7eb;
     border-radius: 10px;
-    padding: 16px;
+    padding: 10px 14px;
+    box-sizing: border-box;
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease,
@@ -10,21 +11,21 @@
 }
 
 .chart-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.07);
     border-color: #cfd8d3;
 }
 
 .chart-card h3 {
-    margin: 0 0 14px;
-    font-size: 15px;
+    margin: 0 0 8px;
+    font-size: 13px;
+    font-weight: 600;
 }
 
 .charts-grid {
-    margin-top: 14px;
     display: grid;
     grid-template-columns: 1.7fr 1fr;
-    gap: 12px;
+    gap: 10px;
 }
 
 .chart-area {
@@ -34,12 +35,12 @@
 .donut-content {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 14px;
 }
 
 .donut-chart-wrapper {
     width: 55%;
-    min-width: 220px;
+    min-width: 180px;
     position: relative;
 }
 
@@ -54,11 +55,11 @@
 }
 
 .donut-center strong {
-    font-size: 24px;
+    font-size: 18px;
 }
 
 .donut-center span {
-    font-size: 12px;
+    font-size: 11px;
     color: #666;
 }
 
@@ -66,20 +67,20 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 10px;
 }
 
 .legend-row {
     display: grid;
-    grid-template-columns: 10px 1fr auto;
-    gap: 8px;
+    grid-template-columns: 8px 1fr auto;
+    gap: 7px;
     align-items: center;
-    font-size: 12px;
+    font-size: 11px;
 }
 
 .legend-dot {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
 }
 

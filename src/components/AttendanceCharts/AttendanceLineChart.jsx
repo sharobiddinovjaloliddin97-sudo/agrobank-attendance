@@ -33,7 +33,7 @@ function AttendanceLineChart() {
       <h3>Kunlik davomat dinamikasi</h3>
 
       <div className="chart-area">
-        <ResponsiveContainer width="100%" height={250}>
+        <ResponsiveContainer width="100%" height={175}>
           <LineChart data={data}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="time" />

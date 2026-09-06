@@ -20,13 +20,13 @@ function AttendanceDonutChart() {
 
       <div className="donut-content">
         <div className="donut-chart-wrapper">
-          <ResponsiveContainer width="100%" height={230}>
+          <ResponsiveContainer width="100%" height={165}>
             <PieChart>
               <Pie
                 data={data}
                 dataKey="value"
-                innerRadius={65}
-                outerRadius={95}
+                innerRadius={48}
+                outerRadius={72}
                 paddingAngle={1}
               >
                 {data.map((item) => (
