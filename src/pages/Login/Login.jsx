@@ -13,30 +13,42 @@ import {
 import "./Login.css";
 import { translations } from "../../locales/translations";
 import LanguageSelector from "../../components/LanguageSelector/LanguageSelector";
+import appConfig from "../../config/appConfig";
+import { loginUser } from "../../services/authService";
 
 function Login() {
   const navigate = useNavigate();
 
   const [selectedLang, setSelectedLang] = useState(() => {
-    return localStorage.getItem("app_lang") || "uz";
+    return localStorage.getItem("app_lang") || appConfig.defaultLang;
   });
 
   const [showPassword, setShowPassword] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const t = translations[selectedLang] || translations.uz;
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (!username.trim() || !password.trim()) {
       setError(t.requiredFields);
       return;
     }
 
-    setError("");
-    navigate("/dashboard");
+    try {
+      setLoading(true);
+      setError("");
+      await loginUser({ username, password });
+      navigate("/dashboard");
+    } catch {
+      setError(t.requiredFields);
+    } finally {
+      setLoading(false);
+    }
   };
+
 
   return (
     <main className="login-page">
@@ -156,8 +168,9 @@ function Login() {
             type="button"
             className="login-btn"
             onClick={handleLogin}
+            disabled={loading}
           >
-            {t.loginBtn}
+            {loading ? "..." : t.loginBtn}
           </button>
 
           <div className="divider">

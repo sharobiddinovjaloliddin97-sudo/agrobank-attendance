@@ -12,17 +12,20 @@ import AttentionStrip from "../../components/AttentionStrip/AttentionStrip";
 import ProblemBranchesCard from "../../components/ProblemBranchesCard/ProblemBranchesCard";
 import RepeatedLateCard from "../../components/RepeatedLateCard/RepeatedLateCard";
 import AverageLateTimeCard from "../../components/AverageLateTimeCard/AverageLateTimeCard";
+import appConfig from "../../config/appConfig";
 
 function Dashboard() {
   const [collapsed, setCollapsed] = useState(false);
-  const [lang, setLang] = useState(() => localStorage.getItem("app_lang") || "uz");
+  const [lang, setLang] = useState(
+    () => localStorage.getItem("app_lang") || appConfig.defaultLang
+  );
 
   const handleLangChange = (newLang) => {
     setLang(newLang);
     localStorage.setItem("app_lang", newLang);
   };
 
-  const t = translations[lang] || translations.uz;
+  const t = translations[lang] || translations[appConfig.defaultLang] || translations.uz;
 
   return (
     <div className={`dashboard-page ${collapsed ? "sidebar-collapsed" : ""}`}>
